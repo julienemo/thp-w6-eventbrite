@@ -1,24 +1,11 @@
-# README
+This is a rails application presented by Julie K
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+please check https://julievent.herokuapp.com/
 
-* Ruby version
 
-* System dependencies
+up to 2019/05/07 you application
 
-* Configuration
+* Register with a real email
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Sign in with email and mdp, to check out events or create your own
