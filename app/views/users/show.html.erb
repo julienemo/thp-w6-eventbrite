@@ -1,14 +1,28 @@
 <h1>Your registered info</h1><br /><br />
 <div class="card" style="width: 18rem;">
   <div class="card-header">
-    ID <%= current_user.id%>: <%= current_user.first_name%> <%= current_user.last_name%> (AGE NOT PROVIDED yo)
+    ID <%= current_user.id%>:
+    <% unless user_signed_in? && current_user.first_name !="" && current_user.first_name !=nil%>
+      Unknown
+    <% else %>
+      <%= current_user.first_name %>
+    <% end %>
+    <% unless user_signed_in? && current_user.last_name !="" && current_user.last_name !=nil%>
+      UNKNOWN
+    <% else %>
+      <%= current_user.last_name %>
+    <% end %>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><%= current_user.email%></li>
-    <li class="list-group-item">From <a href="#">CITY UNPROVIDED</a></li>
-    <li class="list-group-item">admin of
-      <span class="badge badge-pill badge-dark"><%= current_user.managed_events.length%></span>
-       events
+    <li class="list-group-item">
+      <% if current_user.managed_events.length > 0 %>
+        admin of
+          <span class="badge badge-pill badge-dark"><%= current_user.managed_events.length%></span>
+           events
+      <% else %>
+        You have no event yet. <a href="/events/new">Go create one!</a>
+      <% end %>
     </li>
     <%if current_user.description == "" ||current_user.description == nil %>
       <% display = "This user didn't describe himself or herself."%>

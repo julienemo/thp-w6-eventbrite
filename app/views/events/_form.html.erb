@@ -1,8 +1,8 @@
 <%= form_tag url_for(action: action), method: method do %>
   <%= label_tag 'Title (Mandatory, 5-14 characters)' %><br />
   <%= text_field_tag 'title', holders[0], class: 'form-control', style: 'width:30%', placeholder: holders[0] %>
-  <%= label_tag 'Content (Mandatory, 20-1000 characters)' %><br />
-  <%= text_area_tag 'content', holders[1], class: 'form-control',  placeholder: holders[1]%>
+  <%= label_tag 'description (Mandatory, 20-1000 characters)' %><br />
+  <%= text_area_tag 'description', holders[1], class: 'form-control',  placeholder: holders[1]%>
   <br />
   <h5>Organisational details</h5>
   <%= label_tag 'Location' %><br />
@@ -13,8 +13,6 @@
   <%= text_field_tag 'duration', nil, class: 'form-control', style: 'width:30%'%>
   <%= label_tag 'Price' %><br />
   <%= text_field_tag 'price', nil, class: 'form-control', style: 'width:30%'%>
-
-
   <br />
   <br /> <br />
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
