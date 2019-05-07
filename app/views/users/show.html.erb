@@ -1,0 +1,22 @@
+<div class = "body">
+    <h1>Your registered info</h1><br /><br />
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        ID <%= current_user.id%>: <%= current_user.first_name%> <%= current_user.last_name%> (AGE NOT PROVIDED yo)
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= current_user.email%></li>
+        <li class="list-group-item">From <a href="#">CITY UNPROVIDED</a></li>
+        <li class="list-group-item">admin of
+          <span class="badge badge-pill badge-dark"><%= current_user.managed_events.length%></span>
+           events
+        </li>
+        <%if current_user.description == "" ||current_user.description == nil %>
+          <% display = "This user didn't describe himself or herself."%>
+        <%else%>
+          <% display = current_user.description%>
+        <%end%>
+        <li class="list-group-item">Description: <%= display%></li>
+      </ul>
+    </div>
+  </div>
