@@ -11,4 +11,7 @@ up to 2019/05/07 you application
 * Sign in with email and mdp, to check out events or create your own
 
 
-Very unfortunately up to 23:52 both Sendgrid and gmail sender servers are blocked....if during the test you don't receive welcome mail/ event registration mail/ change password mails......let's talk about it
+Very unfortunately up to 23:52 both Sendgrid and gmail sender servers are blocked....if during the test you don't receive welcome mail/ event registration mail/ change password mails......let's talk about it....
+
+
+Also according to observation, there is a higher chance you receive the notification mails if you register with a gmail address.
