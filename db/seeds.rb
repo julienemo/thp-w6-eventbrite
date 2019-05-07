@@ -1,6 +1,6 @@
 Attendance.destroy_all
 Event.destroy_all
-#User.destroy_all
+User.destroy_all
 separator = "-*" * 40
 
 puts separator
@@ -10,7 +10,8 @@ puts "Previous record deleted."
 
 3.times do
   User.create(first_name: Faker::Name.first_name,
-  email: Faker::Internet.email)
+  email: Faker::Internet.email,
+  password: Faker::Code.nric)
 end
 puts "#{User.all.length} fake user profiles created."
 
@@ -22,8 +23,8 @@ users.each do |u|
     title: Faker::Book.title,
     description: Faker::Lorem.sentence(10),
     price: rand(1..1000),
-    start_time: Faker::Time.between(DateTime.now, DateTime.now + 10),
-    duration: rand(1..3)*5)
+    start_time: Faker::Time.between(DateTime.now+1, DateTime.now + 6000),
+    duration: rand(1..3)*5*600)
   end
 end
 puts "#{Event.all.length} events created, 2 per admin."
@@ -36,6 +37,6 @@ users.each do |u|
     end
   end
 end
-puts "#{Attendance.all.length} participations created. Everybody has participated in all event not created by oneself."
+puts "#{Attendance.all.length} participations created. Everybody has participated in all events not created by oneself."
 puts ""
 puts separator
