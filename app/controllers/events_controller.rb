@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, :except=> [:index]
   attr_reader :events
 
   def index

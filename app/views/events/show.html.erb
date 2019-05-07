@@ -1,26 +1,29 @@
 <h5>Welcome to event n°<%= @id%></h5><br /><br />
-   <div class="card" style="width: 50%;">
-     <% user = @event.admin%>
-     <% start = @event.start_time%>
-     <!--the word "end" is reserved. Lazy as I am, I used endd instead-->
-     <!--to add an integer to a time, need to put the time before the integer-->
-     <!--also adding an integer to a DateTime is actually add the number of secs-->
-     <% endd = start + @event.duration * 60 %>
-     <div class="card-header">
-       <%= @event.title%>
-     </div>
-     <ul class="list-group list-group-flush">
-       <li class="list-group-item" style="font-size:x-small;">organized by
-                <a href = "/users/<%= @event.admin_id%>">
-           <%= user.first_name%>
-         </a> in <%= @event.location%></li>
-       <li class="list-group-item"><%= @event.description%></li>
-       <li class="list-group-item" style="font-size:x-small;">
-         starting <%= start%><br /><br />
-         ending <%= endd%><br /><br />
-         Price: <%= @event.price%>
-       </li>
-     </ul>
-   </div>
-    </div>
+<div class="card" style="width: 50%;">
+  <% user = @event.admin%>
+  <!--the word "end" is reserved. Lazy as I am, I used endd instead-->
+  <!--to add an integer to a time, need to put the time before the integer-->
+  <!--also adding an integer to a DateTime is actually add the number of secs-->
+  <div class="card-header">
+    <%= @event.title%>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" style="font-size:x-small;">organized by
+      <a href = "/users/<%= @event.admin_id%>">
+      <% if user.first_name && user.first_name != "" && user.first_name != nil%>
+      <%= user.first_name%>
+      <% else %>
+      unnamed user
+      <% end %>
+      </a> in <%= @event.location%>
+    </li>
+    <li class="list-group-item"><%= @event.description%></li>
+    <li class="list-group-item" style="font-size:x-small;">
+      starting <%= @event.start_time%><br /><br />
+      ending <%= @event.end_time%><br /><br />
+      Price: <%= @event.price%>
+    </li>
+  </ul>
 </div>
+<p><%= @event.participants.length %> people going</p>
+<p>Organizer contact: <%= @event.admin.email%></p>
