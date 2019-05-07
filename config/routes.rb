@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  get 'static_pages/index'
+  get 'static_pages/secret'
   ############################# for Devise
-  root to: "home#index"
+  root to: "static_pages#index"
 
 
 
