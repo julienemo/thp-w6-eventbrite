@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hey <%= @user.first_name %>, you just registered for an event!</h1>
+    <p>
+      <%= @event.title%><br />
+      starts on: <%= @event.start_time%><br />
+      location: <%= @event.location%>
+    </p>
+    <p>
+      Check this link: <%= @url %>.
+    </p>
+    <p> See you very soon!
+  </body>
+</html>
