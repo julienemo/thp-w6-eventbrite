@@ -1,5 +1,4 @@
 class AttendanceMailer < ApplicationMailer
-  default from: 'juliette.nada@gmail.com'
 
   def participation_confirmation(attendance)
     @attendance = attendance
