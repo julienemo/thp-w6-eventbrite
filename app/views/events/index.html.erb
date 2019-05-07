@@ -1,4 +1,15 @@
-<div class="body d-flex flex-wrap justify-content-bewteen">
+<h4>Hey
+  <% unless user_signed_in? && current_user.first_name != nil && current_user.first_name != ""%>
+    dear user!
+  <% else %>
+    <%= current_user.first_name%>!
+  <% end %>
+</h4>
+<h5>have a look at our <%= @events.length%> FA-BU-LOUS events<br />
+  OR<br />
+create your own <a href="/events/new">here</a>!</h5>
+<br />
+<div class="d-flex flex-wrap justify-content-bewteen">
   <!--list.includes(:link)is a bit like each_with_index-->
   <!--it allows the each element to come with the links also-->
   <!--the visual result is no more User.find(e.admin_id)-->
@@ -9,20 +20,18 @@
         <div class= 'col'>
           <p  class="card-text">Event <%= e.id %>
 
-          <h5 class="card-title">"<%= e.description %>"</h5>
+          <h5 class="card-title"><%= e.title %></h5>
           <p  class="card-text">
-            Organized by <a href="#"><%= e.admin.first_name%></a>
+            with <a href="#"><%= e.admin.first_name%></a>
           </p>
         </div>
         <div class = 'col flex-grow-0'>
-          <span class="incard">  ooo comment(s)</span>
-          <span class="incard">000 like(s) </span>
         <!--all divs have 'flex-grow-1' by default-->
         <!--in vertical alignment they grow proportionally to take all available place-->
         <!--had to overwrite this for the button so that it stays at the bottom (with justify-content-between)-->
         <!--therefore aligning postions of all buttons-->
         <!--for other alignments go check application.css-->
-          <a href="#" class="btn btn-primary ">See Event</a>
+          <a class="btn btn-secondary" href="/events/<%=e.id%>" role="button">View details &raquo;</a>
         </div>
       </div>
     </div>
