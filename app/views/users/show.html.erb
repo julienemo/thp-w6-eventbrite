@@ -19,7 +19,7 @@
       <% if current_user.managed_events.length > 0 %>
         admin of
           <span class="badge badge-pill badge-dark"><%= current_user.managed_events.length%></span>
-           events
+           event(s)
       <% else %>
         You have no event yet. <a href="/events/new">Go create one!</a>
       <% end %>
@@ -35,3 +35,5 @@
   <p class="btn btn-primar col-md-6"> <a href="/users/edit">Update login</a></p>
   </div>
 </div>
+<h4>See all your events</h4>
+<%= render partial: 'events/list', locals: {events: current_user.managed_events} %>

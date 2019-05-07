@@ -13,31 +13,4 @@
     create your own <a href="/users/sign_in">here</a>!</h5>
   <% end %>
 <br />
-<div class="d-flex flex-wrap justify-content-bewteen">
-  <!--list.includes(:link)is a bit like each_with_index-->
-  <!--it allows the each element to come with the links also-->
-  <!--the visual result is no more User.find(e.admin_id)-->
-  <!--impact on the backend side is reduction of SELECT requests-->
-  <% @events.includes(:admin).each do |e|%>
-    <div class="card col-md-5">
-      <div class="card-body d-flex flex-column justify-content-between">
-        <div class= 'col'>
-          <p  class="card-text">Event <%= e.id %>
-
-          <h5 class="card-title"><%= e.title %></h5>
-          <p  class="card-text">
-            with <a href="#"><%= e.admin.first_name%></a>
-          </p>
-        </div>
-        <div class = 'col flex-grow-0'>
-        <!--all divs have 'flex-grow-1' by default-->
-        <!--in vertical alignment they grow proportionally to take all available place-->
-        <!--had to overwrite this for the button so that it stays at the bottom (with justify-content-between)-->
-        <!--therefore aligning postions of all buttons-->
-        <!--for other alignments go check application.css-->
-          <a class="btn btn-secondary" href="/events/<%=e.id%>" role="button">View details &raquo;</a>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= render partial: "list", locals:{events: @events} %>
