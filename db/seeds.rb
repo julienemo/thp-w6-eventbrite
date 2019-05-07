@@ -1,7 +1,41 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+Attendance.destroy_all
+Event.destroy_all
+#User.destroy_all
+separator = "-*" * 40
+
+puts separator
+puts ""
+puts "Previous record deleted."
+
+
+3.times do
+  User.create(first_name: Faker::Name.first_name,
+  email: Faker::Internet.email)
+end
+puts "#{User.all.length} fake user profiles created."
+
+users = User.all.map{|u| u.id}
+users.each do |u|
+  2.times do
+    Event.create(admin_id: u,
+    location: Faker::Address.city,
+    title: Faker::Book.title,
+    description: Faker::Lorem.sentence(10),
+    price: rand(1..1000),
+    start_time: Faker::Time.between(DateTime.now, DateTime.now + 10),
+    duration: rand(1..3)*5)
+  end
+end
+puts "#{Event.all.length} events created, 2 per admin."
+
+events = Event.all.map{|e| e}
+users.each do |u|
+  events.each do |e|
+    unless e.admin_id == u
+      Attendance.create(event_id: e.id, participant_id: u)
+    end
+  end
+end
+puts "#{Attendance.all.length} participations created. Everybody has participated in all event not created by oneself."
+puts ""
+puts separator
