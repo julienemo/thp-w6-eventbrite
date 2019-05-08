@@ -4,15 +4,13 @@
   <!--the word "end" is reserved. Lazy as I am, I used endd instead-->
   <!--to add an integer to a time, need to put the time before the integer-->
   <!--also adding an integer to a DateTime is actually add the number of secs-->
-  <div class="card-header">
-    <%= @event.title%>
-  </div>
+  <div class="card-header"><%= @event.title%></div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item" style="font-size:x-small;">organized by
       <% if user.first_name && user.first_name != "" && user.first_name != nil%>
-      <%= user.first_name%>
+        <%= user.first_name%>
       <% else %>
-      unnamed user
+        unnamed user
       <% end %>
       in <%= @event.location%>
     </li>
@@ -22,45 +20,41 @@
       ending <%= @event.end_time%><br /><br />
       Price: <%= @event.price%>€
     </li>
-    <li>
-      <!--BELOW DECIDES WHO SEES THE JOIN BUTTON-->
-      <% if (current_user.id != @event.admin_id) && (@participants.include? current_user == false)%>
+    <!--BELOW DECIDES WHO SEES THE JOIN BUTTON-->
+    <% if (current_user.id != @event.admin_id) && (@participants.exclude? current_user == false)%>
+      <div class="card-header d-flex justify-content-center" >
         <% if @event.price > 0%>
-        <div class="card-header d-flex justify-content-center" >
-          <p class="btn btn-primar col-md-6">
-
-          <%= link_to "Join now", new_event_charge_path(@event.id) %><br />
+          <p class="btn btn-primary col-md-6">
+            <%= link_to "Join now", new_event_charge_path(@event.id) %><br />
         <% else %>
-          <%= link_to "Join now", event_attendances_path(@event.id), method: :post %><br />
+            <%= link_to "Join now", event_attendances_path(@event.id), method: :post%><br />
+          </p>
         <% end %>
-      </p></li>
-    </div>
-      <% elsif @participants.include? current_user %>
-      <div class="card-header">
-        You are going to this event
-      </div>
-
-      <% end %>
-
+    <% elsif @participants.include? current_user %>
+      <div class="card-header">You are going to this event</div>
+    <% elsif current_user.id == @event.admin_id %>
+      <div class="card-header">You are admin of this event</div>
+    <% end %>
     <!--ABOVE DECIDES WHO SEES THE JOIN BUTTON-->
-
   </ul>
 </div>
-<p><%= @participants.length %> people going</p>
-<!--BELOW TO VERIFY IF CURRENT USER HAVE RIGHT TO SEE GUEST LIST AND MODIFY/DELETE-->
-<% if current_user.id == @event.admin_id %>
-  <p>Your are the admin of this event</p>
-  <!--BELOW TO VERIFY IF THERE ARE PARTICIPANTS AND DISPLAY ACCORDINGLY-->
-  <% if @participants.present?%>
-  <%= link_to "See guest list", event_attendances_path(@event.id) ,class:"btn btn-primary col-3"%><br />
-  <% else %>
-    Your event has no guest T-T
-  <% end %>
-  </p>
-  <!--ABOVE TO VERIFY IF THERE ARE PARTICIPANTS AND DISPLAY ACCORDINGLY-->
-  <%= link_to "Update event", edit_event_path(@event.id) ,class:"btn btn-primary col-3"%><br /><br />
-  <%= link_to "Delete event", event_path(@event.id), method: :delete, class:"btn btn-primary col-3"%><br />
+  <p><%= @participants.length %> people going</p>
 
+  <!--BELOW TO VERIFY IF CURRENT USER HAVE RIGHT TO SEE GUEST LIST AND MODIFY/DELETE-->
+  <% if current_user.id == @event.admin_id %>
+    <!--BELOW TO VERIFY IF THERE ARE PARTICIPANTS AND DISPLAY ACCORDINGLY-->
+    <div class="d-flex flex-wrap justify-content-between" style="width:50%;">
+    <% unless @participants.present?%>
+      <%= link_to "no guest", class:"btn btn-secondary col-5"%>
+    <% else %>
+      <%= link_to "See guests", event_attendances_path(@event.id) ,class:"btn btn-secondary col-5"%>
+    <% end %>
+    <!--ABOVE TO VERIFY IF THERE ARE PARTICIPANTS AND DISPLAY ACCORDINGLY-->
+    <%= link_to "Update", edit_event_path(@event.id), class:"btn btn-secondary col-5"%>
+    </div><br />
+    <div class="d-flex flex-wrap justify-content-between" style="width:50%;">
+    <%= link_to "Delete event", event_path(@event.id), method: :delete, class:"btn btn-danger col-5"%><br />
+    </div>
 <!--ABOVE TO VERIFY IF CURRENT USER HAVE RIGHT TO SEE GUEST LIST AND MODIFY/DELETE-->
 
 <% else %>
