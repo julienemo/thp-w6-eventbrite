@@ -1,6 +1,6 @@
-Attendance.destroy_all
-Event.destroy_all
-User.destroy_all
+#Attendance.destroy_all
+#Event.destroy_all
+#User.destroy_all
 separator = "-*" * 40
 
 puts separator
