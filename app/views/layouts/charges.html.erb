@@ -1,7 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
+  <head>
+    <title>Event payment</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/flatly/bootstrap.min.css">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
   <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 10px 20px;">
+        <div>
+          <ul class="form-inline">
+            <li><a class="navbar-brand" href="/">Julie's events</a></li>
+            <li><a class="nav-link" href="/">Home</a></li>
+            <% if user_signed_in? %>
+            <li><a class="nav-link" href="/events/new">New event</a></li>
+            <li><a class="nav-link" href="/users/show">My profile</a></li>
+            <% end %>
+          </ul>
+        </div>
+        <div>
+          <ul class="form-inline">
+            <% unless user_signed_in? %>
+            <li><a class="nav-link" href="/users/sign_in">Sign In</a></li>
+            <li><a class="nav-link" href="/users/sign_up">Sign Up</a></li>
+            <% else %>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class:"nav-link" %></li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <% if flash[:success] %>
+      <div class="alert alert-success" role="alert">
+        <%= flash[:success] %>
+      </div>
+    <% end %>
+    <% if flash[:danger] %>
+      <div class="alert alert-danger" role="alert">
+        <%= flash[:danger] %>
+      </div>
+    <% end %>
+    <div class = "body">
     <%= yield %>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>

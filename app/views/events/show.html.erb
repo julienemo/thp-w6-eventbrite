@@ -25,7 +25,12 @@
     <!--BELOW DECIDES WHO SEES THE JOIN BUTTON-->
     <% unless (current_user.id == @event.admin_id) || (@participants.include? current_user)%>
     <div class="card-header d-flex justify-content-center" >
-      <p class="btn btn-primar col-md-6">   <%= link_to "Join now", new_event_attendance_path(params[:id]) %><br />
+      <p class="btn btn-primar col-md-6">
+        <% if @event.price > 0%>
+          <%= link_to "Join now", new_event_charge_path(@event.id) %><br />
+        <% else %>
+          <%= link_to "Join now", new_event_attendance_path(@event.id) %><br />
+        <% end %>
       </p>
     </div>
     <% end %>
