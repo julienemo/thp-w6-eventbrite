@@ -1,0 +1,4 @@
+<h4> You are joining the event <%= @event.id%>:<br /><br /></h4>
+<h5><a href="/events/<%= @event.id%>"><%= @event.title%></a><br /> in <%= @event.location%></h5>
+<% holders = ["ex: riverside afterwork", ""] %>
+<%= render partial: "form" %>

@@ -22,6 +22,11 @@
       ending <%= @event.end_time%><br /><br />
       Price: <%= @event.price%>€
     </li>
+    <div class="card-header d-flex justify-content-center" >
+    <p class="btn btn-primar col-md-6">   <%= link_to "Join now", new_event_attendance_path(params[:id]) %><br />
+</p>
+    </div>
+
   </ul>
 </div>
 <p><%= @event.participants.length %> people going</p>
