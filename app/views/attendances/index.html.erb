@@ -1,0 +1,13 @@
+<h4>Guest list for event nb.<%= @event.id%></h4>
+
+<div class="card" style="width: 50%;">
+  <div class="card-header">
+    Event title: <%= @event.title %>
+  </div>
+  <ul class="list-group list-group-flush">
+    <% @attendances.each do |a| %>
+    <li class="list-group-item" style="font-size:x-small;">
+      User<%= a.participant_id %>: <%= a.participant.first_name %>
+    </li>
+    <% end %>
+  </ul>

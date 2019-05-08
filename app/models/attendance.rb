@@ -1,5 +1,6 @@
 class Attendance < ApplicationRecord
   after_create :send_confirmation
+  validates_uniqueness_of :participant_id, :scope => [:event_id]
 
   belongs_to :event
 
