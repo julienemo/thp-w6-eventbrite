@@ -34,6 +34,7 @@
         </div>
       </nav>
     </header>
+    <div class="text-center">
     <% if flash[:success] %>
       <div class="alert alert-success" role="alert">
         <%= flash[:success] %>
@@ -44,6 +45,7 @@
         <%= flash[:danger] %>
       </div>
     <% end %>
+    </div>
     <div class = "body">
     <%= yield %>
     </div>
