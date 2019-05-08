@@ -2,7 +2,7 @@ class Event < ApplicationRecord
   validates :location, presence: true
   validates :title, presence: true, length: {in: 5..140}
   validates :description, presence: true, length:{in:20..1000}
-  validates :price, inclusion:{in:1..1000}
+  validates :price, inclusion:{in:0..1000}
   validate :duration_be_positive_and_multiple_of_5
   validate :cant_start_in_the_past
 
