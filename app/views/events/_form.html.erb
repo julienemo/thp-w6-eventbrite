@@ -6,13 +6,13 @@
   <br />
   <h5>Organisational details</h5>
   <%= label_tag 'Location' %><br />
-  <%= text_field_tag 'location', nil, class: 'form-control', style: 'width:30%'%>
+  <%= text_field_tag 'location', holders[2], class: 'form-control', style: 'width:30%'%>
   <%= label_tag 'Start time' %><br />
-  <%= text_field_tag 'start_time', nil, class: 'form-control', style: 'width:30%'%>
+  <%= text_field_tag 'start_time', holders[3], class: 'form-control', style: 'width:30%'%>
   <%= label_tag 'Duration' %><br />
-  <%= text_field_tag 'duration', nil, class: 'form-control', style: 'width:30%'%>
+  <%= text_field_tag 'duration', holders[4], class: 'form-control', style: 'width:30%'%>
   <%= label_tag 'Price' %><br />
-  <%= text_field_tag 'price', nil, class: 'form-control', style: 'width:30%'%>
+  <%= text_field_tag 'price', holders[5], class: 'form-control', style: 'width:30%'%>
   <br />
   <br /> <br />
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

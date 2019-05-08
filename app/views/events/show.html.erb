@@ -22,12 +22,34 @@
       ending <%= @event.end_time%><br /><br />
       Price: <%= @event.price%>€
     </li>
+    <!--BELOW DECIDES WHO SEES THE JOIN BUTTON-->
+    <% unless (current_user.id == @event.admin_id) || (@participants.include? current_user)%>
     <div class="card-header d-flex justify-content-center" >
-    <p class="btn btn-primar col-md-6">   <%= link_to "Join now", new_event_attendance_path(params[:id]) %><br />
-</p>
+      <p class="btn btn-primar col-md-6">   <%= link_to "Join now", new_event_attendance_path(params[:id]) %><br />
+      </p>
     </div>
+    <% end %>
+    <!--ABOVE DECIDES WHO SEES THE JOIN BUTTON-->
 
   </ul>
 </div>
-<p><%= @event.participants.length %> people going</p>
-<p>Organizer contact: <%= @event.admin.email%></p>
+<p><%= @participants.length %> people going</p>
+<!--BELOW TO VERIFY IF CURRENT USER HAVE RIGHT TO SEE GUEST LIST AND MODIFY/DELETE-->
+<% if current_user.id == @event.admin_id %>
+  <p>Your are the admin of this event</p>
+  <!--BELOW TO VERIFY IF THERE ARE PARTICIPANTS AND DISPLAY ACCORDINGLY-->
+  <% if @participants.present?%>
+  <%= link_to "See guest list", event_attendances_path(@event.id) ,class:"btn btn-primary col-3"%><br />
+  <% else %>
+    Your event has no guest T-T
+  <% end %>
+  </p>
+  <!--ABOVE TO VERIFY IF THERE ARE PARTICIPANTS AND DISPLAY ACCORDINGLY-->
+  <%= link_to "Update event", edit_event_path(@event.id) ,class:"btn btn-primary col-3"%><br /><br />
+  <%= link_to "Delete event", event_path(@event.id), method: :delete, class:"btn btn-primary col-3"%><br />
+
+<!--ABOVE TO VERIFY IF CURRENT USER HAVE RIGHT TO SEE GUEST LIST AND MODIFY/DELETE-->
+
+<% else %>
+  <p><br/>Organizer contact: <%= @event.admin.email%></p>
+<% end %>

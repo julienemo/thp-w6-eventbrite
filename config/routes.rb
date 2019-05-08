@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'static_pages/index'
+  get 'event_space', to: 'static_pages#event_space'
   get 'static_pages/secret'
   ############################# for Devise
   root to: "events#index"
