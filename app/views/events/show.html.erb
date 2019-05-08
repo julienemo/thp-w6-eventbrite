@@ -21,7 +21,7 @@
       Price: <%= @event.price%>€
     </li>
     <!--BELOW DECIDES WHO SEES THE JOIN BUTTON-->
-    <% if (current_user.id != @event.admin_id) && (@participants.exclude? current_user == false)%>
+    <% if (current_user.id != @event.admin_id) && (@participants.exclude? current_user)%>
       <div class="card-header d-flex justify-content-center" >
         <% if @event.price > 0%>
           <p class="btn btn-primary col-md-6">
