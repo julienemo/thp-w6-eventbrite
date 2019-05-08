@@ -8,19 +8,17 @@ class AttendancesController < ApplicationController
 
   def new
     @user = current_user
-    @event = Event.find(params[:event_id])
   end
 
   def create
-    ####histoire de params permit
-    new_attendance = Attendance.new()
+    new_attendance = Attendance.create(event_id: @event.id, participant_id: current_user.id)
     if new_attendance
       flash[:success] =
-      "Payment succeeded. You're now officially on the guest list!"
+      "You're now officially on the guest list!"
       redirect_to "/events/#{@event.id}"
     else
       flash[:danger] =
-      "Oups, we couldn't debit the card. Mind trying again?"
+      "Oups, we couldn't make it. Mind trying again?"
       render 'new'
     end
   end
