@@ -9,6 +9,7 @@ gem 'pry'
 gem 'bcrypt'
 gem 'dotenv-rails'
 gem 'devise'
+gem 'stripe'
 
 group :development do
   gem "letter_opener"
