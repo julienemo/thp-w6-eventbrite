@@ -117,7 +117,8 @@ ul
   position: absolute;
 }
 
-.sign {
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
+.form label
+{
+  font-size: x-small;
+  color:gray;
 }
