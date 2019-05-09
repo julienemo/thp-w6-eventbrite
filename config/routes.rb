@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'avatars/create'
   ############################# for Devise
   root to: "events#index"
   devise_for :users
@@ -10,5 +11,5 @@ Rails.application.routes.draw do
     resources :attendances
     resources :charges
   end
-  
+
 end

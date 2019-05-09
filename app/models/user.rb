@@ -2,6 +2,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # note the scope of presence:true
+  validates :first_name, presence: true, on: :update
+
   after_create :send_welcome
 
   has_one_attached :avatar
