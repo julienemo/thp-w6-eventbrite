@@ -13,7 +13,11 @@
       <%= current_user.last_name %>
     <% end %>
   </div>
-  <%= image_tag 'profile-default.png', style: 'height: 300px;'%>
+  <% unless current_user.avatar.attached?%>
+    <%= image_tag 'profile-default.png', style: 'height: 300px;'%>
+  <% else %>
+    <%= image_tag current_user.avatar, alt: 'user_avatar' %>
+  <% end %>
 
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><%= current_user.email%></li>
@@ -33,9 +37,11 @@
     <%end%>
     <li class="list-group-item">Description: <%= display%></li>
   </ul>
-  <div class="card-header d-flex justify-content-center" >
-  <p class="btn btn-primar col-md-6"> <a href="/users/edit">Update login</a></p>
+  <div class="card-header d-flex justify-content-between" >
+  <div class="btn col-md-5"> <a href="/users/<%= current_user.id%>/edit">Update profile</a></div>
+  <div class="btn col-md-5"> <a href="/users/edit">Update login</a></div>
   </div>
+
 </div>
 <h4>See all events you manage</h4>
 <%= render partial: 'events/list', locals: {events: current_user.managed_events} %>
