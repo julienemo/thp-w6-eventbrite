@@ -13,6 +13,8 @@
       <%= current_user.last_name %>
     <% end %>
   </div>
+  <%= image_tag 'profile-default.png', style: 'height: 300px;'%>
+
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><%= current_user.email%></li>
     <li class="list-group-item">
@@ -35,5 +37,5 @@
   <p class="btn btn-primar col-md-6"> <a href="/users/edit">Update login</a></p>
   </div>
 </div>
-<h4>See all your events</h4>
+<h4>See all events you manage</h4>
 <%= render partial: 'events/list', locals: {events: current_user.managed_events} %>

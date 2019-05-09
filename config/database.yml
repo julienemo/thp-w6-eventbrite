@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+#  database: julie-event_development
   database: julie-event_production
   username: julie-event
   password: <%= ENV['JULIE-EVENT_DATABASE_PASSWORD'] %>
