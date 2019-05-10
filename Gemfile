@@ -10,6 +10,8 @@ gem 'bcrypt'
 gem 'dotenv-rails'
 gem 'devise'
 gem 'stripe'
+gem 'bootstrap-sass'
+gem 'font-awesome-rails'
 
 group :development do
   gem "letter_opener"
