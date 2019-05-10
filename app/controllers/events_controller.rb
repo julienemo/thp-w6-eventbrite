@@ -5,41 +5,34 @@ class EventsController < ApplicationController
 
 
   def index
-    @events = Event.all.order(:id)
+    @events = Event.all
   end
 
   def show
-    if !@event.validated
+    if !@event.validated && current_user!=@event.admin
       flash[:danger]="Naaaaa, can't access to this event."
       redirect_to events_path
-    else
-      @participants = @event.participants
+    elsif !@event.validated && current_user==@event.admin
+      flash.now[:success]="Your event is waiting for validation. It is not visible to other users yet."
     end
+    @participants = @event.participants
   end
 
   def new
   end
 
   def create
-    puts "$"*60
-    p event_photo
-    puts "$"*60
-    p  event_attributes
-    puts "$"*60
-    p params
-    puts "$"*60
-
     if !new_event.valid?
       flash[:danger] = "Event creation failed, please try again."
       render 'new'
     elsif !event_photo.present?
       flash[:danger] = "Please do upload a photo. I insist."
       render 'new'
-    #elsif !attach_photo(new_event)
-    #  flash[:danger] = "Couldn't attach photo. Please do go to editing page and try again."
-    #  redirect_to edit_event_path(new_event.id)
+    elsif !attach_photo(new_event)
+      flash[:danger] = "Couldn't attach photo. Please do go to editing page and try again."
+      redirect_to edit_event_path(new_event.id)
     else
-      flash[:success] = "Perfect, one event created. Check it out!"
+      flash[:success] = "Event created. It'll appear here once validated by a wise person!"
       redirect_to events_path
     end
   end
@@ -54,12 +47,15 @@ class EventsController < ApplicationController
       )
     )
 
-    if @event.valid?
-      flash[:success] = "Event updated. Check it out!"
-      redirect_to event_path(@event.id)
-    else
+    if !@event.valid?
       flash[:danger] = "Update failed. Please try again."
       render 'edit'
+    elsif event_photo.present? && !attach_photo(@event)
+      flash[:danger] = "Event info update but couldn't upload photo. Please try again."
+      render 'edit'
+    else
+      flash[:success] = "Event updated. Check it out!"
+      redirect_to event_path(@event.id)
     end
   end
 
@@ -75,8 +71,16 @@ class EventsController < ApplicationController
     params.permit(:photo)[:photo]
   end
 
+  # note how this method is call 3 times in #new
+  # it used to be a good old Event.create
+  # the thing is...it's called 3 times
+  # which means #new creates 3 times a new event...
+  # now it is @event = || var
+  # which means if @event is already defined
+  # return @event and ignore whatever follows
+  # otherwise, assign var value to @event
   def new_event
-    new_event = Event.create(
+    @event ||= Event.create(
         event_attributes.merge(
           admin_id: current_user.id
         )
@@ -94,8 +98,8 @@ class EventsController < ApplicationController
   end
 
   def get_current_event
-    id = params[:id].to_i
-    @event = Event.find(id)
+    @id = params[:id].to_i
+    @event = Event.find(@id)
   rescue
     flash[:danger] ="Naaaaa, this event doesn't exist...."
     redirect_to events_path

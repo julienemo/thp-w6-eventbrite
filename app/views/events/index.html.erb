@@ -5,7 +5,8 @@
     <%= current_user.first_name%>!
   <% end %>
 </h4>
-<h5>have a look at our <%= @events.length%> FA-BU-LOUS events<br />
+<% events = @events.where(validated: true)%>
+<h5>have a look at our <%= events.length%> FA-BU-LOUS events<br />
   OR<br />
   <% if user_signed_in? %>
     create your own <a href="/events/new">here</a>!</h5>
@@ -13,4 +14,4 @@
     create your own <a href="/users/sign_in">here</a>!</h5>
   <% end %>
 <br />
-<%= render partial: "list", locals:{events: @events} %>
+<%= render partial: "list", locals:{events: events} %>
