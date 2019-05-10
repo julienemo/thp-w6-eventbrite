@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   end
 
   def attach_avatar
+
     current_user.avatar.attach(user_avatar)
     current_user.avatar.attached?
   end

@@ -1,15 +1,15 @@
 <h1>Your registered info</h1><br /><br />
 
-<div class="card" style="width: 70%;display: inline-block">
+<div class="card" style="display: inline-block">
   <div class="card-header">
     ID <%= current_user.id%>:
       <%= current_user.first_name %>
       <%= current_user.last_name %>
   </div>
   <% unless current_user.avatar.attached?%>
-    <%= image_tag 'profile-default.png',alt: 'default_avatar', style: 'object-fit:contain;'%>
+    <%= image_tag 'profile-default.png',alt: 'default_avatar', style: 'object-fit:fill;width: 100%; height: 100%;'%>
   <% else %>
-    <%= image_tag current_user.avatar, alt: 'user_avatar', style: 'object-fit:contain;' %>
+    <%= image_tag current_user.avatar, alt: 'user_avatar', style: 'object-fit:fill;width: 100%; height: 100%;' %>
   <% end %>
 
   <ul class="list-group list-group-flush">
@@ -30,9 +30,9 @@
     <%end%>
     <li class="list-group-item">Description: <%= display%></li>
   </ul>
-  <div class="card-header d-flex justify-content-between" >
-  <div class="btn col-md-5"> <a href="/users/<%= current_user.id%>/edit">Update profile</a></div>
-  <div class="btn col-md-5"> <a href="/users/edit">Update login</a></div>
+  <div class="card-header d-flex flex-wrap justify-content-around" >
+  <div class="btn"> <a href="/users/<%= current_user.id%>/edit">Update profile</a></div>
+  <div class="btn"> <a href="/users/edit">Update login</a></div>
   </div>
 
 </div>
