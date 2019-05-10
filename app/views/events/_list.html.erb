@@ -3,15 +3,22 @@
   <!--it allows the each element to come with the links also-->
   <!--the visual result is no more User.find(e.admin_id)-->
   <!--impact on the backend side is reduction of SELECT requests-->
-  <% events.includes(:admin).each do |e|%>
-    <div class="card col-md-5">
+  <% events.includes(:admin).sort.reverse.each do |e|%>
+    <div class="card">
       <div class="card-body d-flex flex-column">
         <div class= 'col'>
           <p  class="card-text">Event <%= e.id %>
-
+            <% if e.validated == nil %>
+            (awaiting)
+            <% elsif e.validated == false%>
+            (rejected)
+            <% end %>
+            <span><%= link_to "x", event_path(e.id), method: :delete, confirm: "Are you sure?", style:"color: red; backgroud-color:black;"%>
+            </span>
+          </p>
           <h5 class="card-title"><%= e.title %></h5>
           <p  class="card-text">
-            with <a href="#"><%= e.admin.first_name%></a>
+            with <a href="#"><%= e.admin.first_name %></a>
           </p>
         </div>
         <div class = 'col flex-grow-0'>

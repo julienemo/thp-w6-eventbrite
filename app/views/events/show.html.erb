@@ -2,9 +2,11 @@
 <div style="text-align: center;">
 <div class="card" style="display: inline-block;" >
   <% user = @event.admin%>
-  <!--the word "end" is reserved. Lazy as I am, I used endd instead-->
-  <!--to add an integer to a time, need to put the time before the integer-->
-  <!--also adding an integer to a DateTime is actually add the number of secs-->
+    <% unless @event.photo.attached?%>
+      <%= image_tag 'event-default.jpg',alt: 'default_event_title_photo', style: 'object-fit:fill; width: 100%; height: 100%;'%>
+    <% else %>
+      <%= image_tag @event.photo, alt: 'event_title_photo', style: 'object-fit:fill;width: 100%; height: 100%;' %>
+    <% end %>
   <div class="card-header"><%= @event.title%></div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item" style="font-size:x-small;">organized by
@@ -21,7 +23,7 @@
     <% if (current_user.id != @event.admin_id) && (@participants.exclude? current_user)%>
       <div class="card-header d-flex justify-content-center" >
         <% if @event.price > 0%>
-          <p class="btn btn-primary col-md-6">
+          <p class="btn btn-primary">
             <%= link_to "Join now", new_event_charge_path(@event.id) %><br />
         <% else %>
             <%= link_to "Join now", event_attendances_path(@event.id), method: :post%><br />
@@ -43,15 +45,15 @@
     <!--BELOW TO VERIFY IF THERE ARE PARTICIPANTS AND DISPLAY ACCORDINGLY-->
     <div class="d-flex flex-wrap justify-content-between" >
     <% unless @participants.present?%>
-      <%= link_to "no guest", class:"btn btn-secondary col-5"%>
+      <%= link_to "no guest", class:"btn btn-secondary"%>
     <% else %>
-      <%= link_to "See guests", event_attendances_path(@event.id) ,class:"btn btn-secondary col-5"%>
+      <%= link_to "See guests", event_attendances_path(@event.id) ,class:"btn btn-secondary"%>
     <% end %>
     <!--ABOVE TO VERIFY IF THERE ARE PARTICIPANTS AND DISPLAY ACCORDINGLY-->
-    <%= link_to "Update", edit_event_path(@event.id), class:"btn btn-secondary col-5"%>
+    <%= link_to "Update", edit_event_path(@event.id), class:"btn btn-secondary"%>
     </div><br />
     <div class="d-flex flex-wrap justify-content-between">
-    <%= link_to "Delete event", event_path(@event.id), method: :delete, confirm: "Are you sure?", class:"btn btn-danger col-5"%><br />
+    <%= link_to "Delete event", event_path(@event.id), method: :delete, confirm: "Are you sure?", class:"btn btn-danger"%><br />
     </div>
 <!--ABOVE TO VERIFY IF CURRENT USER HAVE RIGHT TO SEE GUEST LIST AND MODIFY/DELETE-->
 
