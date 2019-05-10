@@ -1,6 +1,7 @@
+<div style="display: inline-block">
 <h4>Update your profile</h4>
 
-<div class="form" style="width:70%;">
+<div class="form" style="width:100%;">
   <p><br />User ID: <%= current_user.id%></p>
 
     <%= form_tag user_path(current_user.id), multipart: true, method: :put do %>
@@ -32,3 +33,4 @@
        </div>
        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
     <% end %>
+</div>

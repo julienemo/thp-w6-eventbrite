@@ -12,6 +12,7 @@ gem 'devise'
 gem 'stripe'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
+gem 'jquery-rails'
 
 group :development do
   gem "letter_opener"

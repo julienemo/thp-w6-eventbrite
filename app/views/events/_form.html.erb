@@ -1,18 +1,19 @@
-<%= form_tag url_for(action: action), method: method do %>
+<div style="text-align:center">
+<%= form_tag url_for(action: action), method: method, style:"display:inline-block;" do %>
   <%= label_tag 'Title (Mandatory, 5-14 characters)' %><br />
-  <%= text_field_tag 'title', holders[0], class: 'form-control', style: 'width:30%', placeholder: holders[0] %>
+  <%= text_field_tag 'title', holders[0], class: 'form-control', placeholder: holders[0] %>
   <%= label_tag 'description (Mandatory, 20-1000 characters)' %><br />
   <%= text_area_tag 'description', holders[1], class: 'form-control',  placeholder: holders[1]%>
   <br />
   <h5>Organisational details</h5>
   <%= label_tag 'Location' %><br />
-  <%= text_field_tag 'location', holders[2], class: 'form-control', style: 'width:30%'%>
+  <%= text_field_tag 'location', holders[2], class: 'form-control'%>
   <%= label_tag 'Start time' %><br />
-  <%= datetime_field_tag 'start_time', holders[3], class: 'form-control', style: 'width:30%'%>
+  <%= datetime_field_tag 'start_time', holders[3], class: 'form-control'%>
   <%= label_tag 'Duration' %><br />
-  <%= number_field_tag 'duration', holders[4], class: 'form-control', style: 'width:30%'%>
+  <%= number_field_tag 'duration', holders[4], class: 'form-control'%>
   <%= label_tag 'Price' %><br />
-  <%= number_field_tag 'price', holders[5], class: 'form-control', style: 'width:30%'%>
+  <%= number_field_tag 'price', holders[5], class: 'form-control'%>
   <br />
   <br /> <br />
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

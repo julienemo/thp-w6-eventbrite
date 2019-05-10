@@ -1,22 +1,15 @@
 <h1>Your registered info</h1><br /><br />
-<div class="card" style="width: 18rem;">
+
+<div class="card" style="width: 70%;display: inline-block">
   <div class="card-header">
     ID <%= current_user.id%>:
-    <% unless user_signed_in? && current_user.first_name !="" && current_user.first_name !=nil%>
-      Unknown
-    <% else %>
       <%= current_user.first_name %>
-    <% end %>
-    <% unless user_signed_in? && current_user.last_name !="" && current_user.last_name !=nil%>
-      UNKNOWN
-    <% else %>
       <%= current_user.last_name %>
-    <% end %>
   </div>
   <% unless current_user.avatar.attached?%>
-    <%= image_tag 'profile-default.png', style: 'height: 300px;'%>
+    <%= image_tag 'profile-default.png',alt: 'default_avatar', style: 'object-fit:contain;'%>
   <% else %>
-    <%= image_tag current_user.avatar, alt: 'user_avatar' %>
+    <%= image_tag current_user.avatar, alt: 'user_avatar', style: 'object-fit:contain;' %>
   <% end %>
 
   <ul class="list-group list-group-flush">
